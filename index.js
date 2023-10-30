@@ -31,7 +31,7 @@
 
 
 
-console.log(10);
+//console.log(10);
 
 // let currentPlayer = playerOne
 
@@ -77,6 +77,7 @@ for (let c = 1; c <= columns; c++) {
             console.log(s)
             let thisSlot = document.getElementById(`${s.coord[0]}:${s.coord[1]}`)
             console.log(thisSlot);
+            dropPiece(thisSlot, s);
         })
         slot.setAttribute('id',`${r}:${c}`);
         slot.setAttribute('class','slot');
@@ -85,6 +86,29 @@ for (let c = 1; c <= columns; c++) {
     }
     cols.push(subRow);
     board.append(row);
+}
+
+function dropPiece(slot, player){
+    const selectedSlot = `${slot.id}`;
+    //console.log("selectedSlot: " + selectedSlot);
+    const columnSlots = [['1:1', '1:2', '1:3', '1:4', '1:5', '1:6'], ['2:1', '2:2', '2:3', '2:4', '2:5', '2:6'], ['3:1', '3:2', '3:3', '3:4', '3:5', '3:6'],['4:1', '4:2', '4:3', '4:4', '4:5', '4:6'], ['5:1', '5:2', '5:3', '5:4', '5:5', '5:6'], ['6:1', '6:2', '6:3', '6:4', '6:5', '6:6'],['7:1', '7:2', '7:3', '7:4', '7:5', '7:6']];
+
+    for (let i = 0; i < columnSlots.length; i++){
+        for (let j = 0; j < columnSlots[i].length; j++){
+            //console.log("columnSlots: " + columnSlots[i][j]);
+            if (selectedSlot === columnSlots[i][j]){
+                /* check the column for how many slots are occupied from the bottom of the columnSlots[i] value in the array by iterating backwards and checking to see if there is a color value to the slot that is not white. */
+                for(let k = 5; k >= 0; k--) {
+                    columnSlots[i][k];
+                    console.log(slot.id);
+                    console.log(slot.style.backgroundColor);
+                    slot.style.backgroundColor = player.player;
+                }
+            }
+        }
+    }
+
+    
 }
 
 // const grid = {
