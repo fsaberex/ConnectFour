@@ -97,12 +97,26 @@ function dropPiece(slot, player){
         for (let j = 0; j < columnSlots[i].length; j++){
             //console.log("columnSlots: " + columnSlots[i][j]);
             if (selectedSlot === columnSlots[i][j]){
-                /* check the column for how many slots are occupied from the bottom of the columnSlots[i] value in the array by iterating backwards and checking to see if there is a color value to the slot that is not white. */
+                /* check the column for how many slots are occupied from the bottom of the columnSlots[i] value in the array by iterating backwards and checking to see if there is a color value to the slot that is undefined. */
                 for(let k = 5; k >= 0; k--) {
-                    columnSlots[i][k];
+                    let currentSlot = document.getElementById(columnSlots[i][k]);
+                    //columnSlots[i][k];
                     console.log(slot.id);
-                    console.log(slot.style.backgroundColor);
-                    slot.style.backgroundColor = player.player;
+                    console.log(currentSlot.style.backgroundColor);
+                    //currentSlot.style.backgroundColor = player.player;
+                    //slot.style.backgroundColor = player.player;
+                    //console.log(document.getElementById(columnSlots[i][k]));
+                    if(!currentSlot.style.backgroundColor){
+                        console.log(currentSlot.style.backgroundColor);
+                        currentSlot.style.backgroundColor = player.player;
+                        //columnSlots[i][k+1];
+                        break;
+                    }
+                    if(currentSlot.style.backgroundColor) {
+                        console.log(currentSlot.style.backgroundColor);
+                        continue;
+                    }
+
                 }
             }
         }
