@@ -97,7 +97,7 @@ function dropPiece(slot, player){
         for (let j = 0; j < columnSlots[i].length; j++){
             //console.log("columnSlots: " + columnSlots[i][j]);
             if (selectedSlot === columnSlots[i][j]){
-                /* check the column for how many slots are occupied from the bottom of the columnSlots[i] value in the array by iterating backwards and checking to see if there is a color value to the slot that is undefined. */
+                /* check the column for how many slots are occupied from the bottom of the columnSlots[i] value in the array by iterating backwards and checking to see if there is a color value to the slot or that is undefined. */
                 for(let k = 5; k >= 0; k--) {
                     let currentSlot = document.getElementById(columnSlots[i][k]);
                     //columnSlots[i][k];
@@ -109,7 +109,6 @@ function dropPiece(slot, player){
                     if(!currentSlot.style.backgroundColor){
                         console.log(currentSlot.style.backgroundColor);
                         currentSlot.style.backgroundColor = player.player;
-                        //columnSlots[i][k+1];
                         break;
                     }
                     if(currentSlot.style.backgroundColor) {
@@ -124,6 +123,16 @@ function dropPiece(slot, player){
 
     
 }
+
+//Need to evaluate for win conditions
+//Need to determine who goes first randomly
+//Need to have a win counter
+//Need to change players
+//Need to check for if the board is full, reset game, and 
+//Need to have a function that clears the board if full
+//Use Restart Button to clear the board and start the game over. If a player restarts the game they receive a loss. (Maybe change button to conced instead of Restart?)
+
+//Nice to have: Make it look like the pieces are falling down
 
 // const grid = {
 //     slots: [],
