@@ -30,9 +30,6 @@
 // set up the players
 
 
-
-console.log(10);
-
 // let currentPlayer = playerOne
 
 // const playerOne = {
@@ -53,39 +50,81 @@ console.log(10);
 
 class Slot {
     constructor(coord) {
-        this.player = null;
+        // this.player = null;
         this.coord = coord;
     }
 }
 
-let rows = 7;
-let columns = 6;
-
-let cols = [];
-
-let board = document.getElementById('board');
-
-for (let c = 1; c <= columns; c++) {
-    let subRow = [];
-    let row = document.createElement('div');
-    row.setAttribute('class','row')
-    for (let r = 1; r <= rows; r++) {
-        let s = new Slot([r,c]);
-        let slot = document.createElement('div');
-        slot.addEventListener('click', () => {
-            s.player = 'red';
-            console.log(s)
-            let thisSlot = document.getElementById(`${s.coord[0]}:${s.coord[1]}`)
-            console.log(thisSlot);
-        })
-        slot.setAttribute('id',`${r}:${c}`);
-        slot.setAttribute('class','slot');
-        row.append(slot);
-        subRow.push(s);
+class Game {
+    constructor() {
+        this.board = [[],[],[],[],[],[]];
+        this.makeBoard();
     }
-    cols.push(subRow);
-    board.append(row);
+
+    makeBoard() {
+        let rows = 6;
+        let columns = 7;
+
+        let board = document.getElementById('board');
+
+        for (let r = 1; r <= rows; r++) {
+            let subRow = [];
+            let row = document.createElement('div');
+            row.setAttribute('class','row')
+            for (let c = 1; c <= columns; c++) {
+                let s = new Slot([c,r]);
+                let slot = document.createElement('div');
+                slot.addEventListener('click', () => {                    
+                    // console.log(s)
+                    // let thisSlot = document.getElementById(`${s.coord[0]}:${s.coord[1]}`)
+                    // console.log(thisSlot);
+                    this.placeToken(s);
+                    //call a function to 
+                        //find lowest available slot in selected column
+                        //change lowest slot color/player
+                        //check for win conditions
+                        //
+                })
+                slot.setAttribute('id',`${c}:${r}`);
+                slot.setAttribute('class','slot');
+                row.append(slot);
+                console.log(c-1);
+                console.log(this.board[0]);
+                this.board[c-1].push(s);
+            }
+            // this.board.push(subRow);
+            board.append(row);
+        }
+    }
+
+    placeToken(slot) {
+        let thisSlot = document.getElementById(`${slot.coord[0]}:${slot.coord[1]}`)
+        thisSlot.style.backgroundColor = 'red';
+        // console.log(this.board[slot.coord[1]]);
+        console.log(this.board);
+        
+        // for(let i = 5; i >= 0; i--) {
+        //     if()
+        // }
+    }
 }
+
+
+let game = new Game();
+// fill()
+//
+
+
+//What we know what we want to do
+//Play connect four
+//Have two players
+//Win counter
+//Have Slot classes that provide the player color and coordinates in the grid
+//What are the challenges we will face?
+//Getting our heads in the same place (having everyone understand the logic). Different perspectives.
+//Sufficiently communicating when we need help
+//add a dropping sound
+//yeet button
 
 // const grid = {
 //     slots: [],
@@ -106,9 +145,3 @@ for (let c = 1; c <= columns; c++) {
 
 
 
-
-// }
-
-// for (let i = 0; i < columns; i++) {
-//     for 
-// }
