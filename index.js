@@ -96,25 +96,20 @@ class Game {
     }
 
     placeToken(slot) {
-        let thisSlot = document.getElementById(`${slot.coord[0]}:${slot.coord[1]}`)
-        thisSlot.style.backgroundColor = 'red';
+        
         let columnArray = this.board[slot.coord[0] - 1];
 
-        console.log(columnArray); // use this to grab the column array 
-
-        let on = true;
+        // check through the column array for an open slot, starting from bottom. set the first available slot's player to red and change div background color.
         
-        for (let space of columnArray) {
-            let thisSlot = document.getElementById(`${space.coord[0]}:${space.coord[1]}`);
-            thisSlot.style.backgroundColor = on ? 'red' : 'black';
-
-            on = !on;
+        for(let i = 5; i >= 0; i--) {
+            if (columnArray[i].player === null) {
+                columnArray[i].player = 'red';
+                let filledSlot = document.getElementById(`${columnArray[i].coord[0]}:${columnArray[i].coord[1]}`);
+                filledSlot.style.backgroundColor = 'red';
+                break;
+            }
             
         }
-        
-        // for(let i = 5; i >= 0; i--) {
-        //     if()
-        // }
     }
 }
 
