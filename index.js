@@ -50,7 +50,7 @@
 
 class Slot {
     constructor(coord) {
-        // this.player = null;
+        this.player = null;
         this.coord = coord;
     }
 }
@@ -96,18 +96,24 @@ class Game {
     }
 
     placeToken(slot) {
-        
-        let columnArray = this.board[slot.coord[0] - 1];
+
+        let columnArray = this.board[slot.coord[0] - 1]; // use this to grab the column array
 
         // check through the column array for an open slot, starting from bottom. set the first available slot's player to red and change div background color.
         
         for(let i = 5; i >= 0; i--) {
+            if (columnArray[0].player != null){
+                console.log("This column is full.");
+                break;
+            }
             if (columnArray[i].player === null) {
                 columnArray[i].player = 'red';
                 let filledSlot = document.getElementById(`${columnArray[i].coord[0]}:${columnArray[i].coord[1]}`);
                 filledSlot.style.backgroundColor = 'red';
+                console.log(this.board);
                 break;
             }
+            
             
         }
     }
