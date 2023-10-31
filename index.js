@@ -57,7 +57,7 @@ class Slot {
 
 class Game {
     constructor() {
-        this.board = [[],[],[],[],[],[]];
+        this.board = [[],[],[],[],[],[],[]];
         this.makeBoard();
     }
 
@@ -68,7 +68,6 @@ class Game {
         let board = document.getElementById('board');
 
         for (let r = 1; r <= rows; r++) {
-            let subRow = [];
             let row = document.createElement('div');
             row.setAttribute('class','row')
             for (let c = 1; c <= columns; c++) {
@@ -88,8 +87,7 @@ class Game {
                 slot.setAttribute('id',`${c}:${r}`);
                 slot.setAttribute('class','slot');
                 row.append(slot);
-                console.log(c-1);
-                console.log(this.board[0]);
+                // console.log(this.board[c-1]);
                 this.board[c-1].push(s);
             }
             // this.board.push(subRow);
@@ -100,8 +98,19 @@ class Game {
     placeToken(slot) {
         let thisSlot = document.getElementById(`${slot.coord[0]}:${slot.coord[1]}`)
         thisSlot.style.backgroundColor = 'red';
-        // console.log(this.board[slot.coord[1]]);
-        console.log(this.board);
+        let columnArray = this.board[slot.coord[0] - 1];
+
+        console.log(columnArray); // use this to grab the column array 
+
+        let on = true;
+        
+        for (let space of columnArray) {
+            let thisSlot = document.getElementById(`${space.coord[0]}:${space.coord[1]}`);
+            thisSlot.style.backgroundColor = on ? 'red' : 'black';
+
+            on = !on;
+            
+        }
         
         // for(let i = 5; i >= 0; i--) {
         //     if()
