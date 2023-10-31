@@ -50,7 +50,7 @@
 
 class Slot {
     constructor(coord) {
-        // this.player = null;
+        this.player = null;
         this.coord = coord;
     }
 }
@@ -96,8 +96,8 @@ class Game {
     }
 
     placeToken(slot) {
-        
-        let columnArray = this.board[slot.coord[0] - 1];
+
+        let columnArray = this.board[slot.coord[0] - 1]; // use this to grab the column array
 
         // check through the column array for an open slot, starting from bottom. set the first available slot's player to red and change div background color.
         
