@@ -64,6 +64,7 @@ class Game {
     makeBoard() {
         let rows = 6;
         let columns = 7;
+        let activePlayer = 'red';
 
         let board = document.getElementById('board');
 
@@ -74,28 +75,26 @@ class Game {
                 let s = new Slot([c,r]);
                 let slot = document.createElement('div');
                 slot.addEventListener('click', () => {                    
-                    // console.log(s)
-                    // let thisSlot = document.getElementById(`${s.coord[0]}:${s.coord[1]}`)
-                    // console.log(thisSlot);
-                    this.placeToken(s);
-                    //call a function to 
-                        //find lowest available slot in selected column
-                        //change lowest slot color/player
-                        //check for win conditions
-                        //
+                    //place token in lowest available slot
+                    this.placeToken(s,activePlayer);
+                    //change active player
+                    activePlayer = activePlayer === 'red' ? 'black' : 'red';
+
+                    //check for win conditions
                 })
+
                 slot.setAttribute('id',`${c}:${r}`);
                 slot.setAttribute('class','slot');
                 row.append(slot);
-                // console.log(this.board[c-1]);
+                
                 this.board[c-1].push(s);
             }
-            // this.board.push(subRow);
+            
             board.append(row);
         }
     }
 
-    placeToken(slot) {
+    placeToken(slot,player) {
 
         let columnArray = this.board[slot.coord[0] - 1]; // use this to grab the column array
 
@@ -107,9 +106,9 @@ class Game {
                 break;
             }
             if (columnArray[i].player === null) {
-                columnArray[i].player = 'red';
+                columnArray[i].player = player;
                 let filledSlot = document.getElementById(`${columnArray[i].coord[0]}:${columnArray[i].coord[1]}`);
-                filledSlot.style.backgroundColor = 'red';
+                filledSlot.style.backgroundColor = player;
                 console.log(this.board);
                 break;
             }
