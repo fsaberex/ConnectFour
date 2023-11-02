@@ -48,6 +48,8 @@
 
 // set up the board with a function 
 
+let instructions = document.getElementById('instructions');
+
 class Slot {
     constructor(coord) {
         this.player = null;
@@ -58,13 +60,14 @@ class Slot {
 class Game {
     constructor() {
         this.board = [[],[],[],[],[],[],[]];
+        this.activePlayer = 'red';
         this.makeBoard();
+        // this.activePlayer = 'red';
     }
 
     makeBoard() {
         let rows = 6;
         let columns = 7;
-        let activePlayer = 'red';
 
         let board = document.getElementById('board');
 
@@ -76,11 +79,12 @@ class Game {
                 let slot = document.createElement('div');
                 slot.addEventListener('click', () => {                    
                     //place token in lowest available slot
-                    this.placeToken(s,activePlayer);
+                    this.placeToken(s);
                     //change active player
-                    activePlayer = activePlayer === 'red' ? 'black' : 'red';
+                    
 
                     //check for win conditions
+                    //this.checkBoard();
                 })
 
                 slot.setAttribute('id',`${c}:${r}`);
@@ -92,9 +96,11 @@ class Game {
             
             board.append(row);
         }
+        
+        instructions.innerText = `It is ${this.activePlayer}'s turn`
     }
 
-    placeToken(slot,player) {
+    placeToken(slot) {
 
         let columnArray = this.board[slot.coord[0] - 1]; // use this to grab the column array
 
@@ -106,15 +112,78 @@ class Game {
                 break;
             }
             if (columnArray[i].player === null) {
-                columnArray[i].player = player;
+                columnArray[i].player = this.activePlayer;
                 let filledSlot = document.getElementById(`${columnArray[i].coord[0]}:${columnArray[i].coord[1]}`);
-                filledSlot.style.backgroundColor = player;
+                if (this.activePlayer === 'red'){
+                    filledSlot.classList.add('red');
+
+                } else {
+                    filledSlot.classList.add('black');
+
+                }
+                let bottomSlot = [columnArray[0].coord[0], i + 1];
+                this.checkBoard(bottomSlot);
+                // filledSlot.style.backgroundColor = player;
                 console.log(this.board);
                 break;
             }
             
             
         }
+
+        this.activePlayer = this.activePlayer === 'red' ? 'black' : 'red';
+        instructions.innerText = `It is now ${this.activePlayer}'s turn`
+    }
+
+    checkBoard(slot) {
+        // create a new array that includes every slot in the row to which the token was added
+        // read through that array looking for a consecutive group of four same-color tokens
+
+        //When a piece is dropped, we want to evaluate the board every time.
+        //We want to check for vertical, horizontal, and diagonal.
+        //Gather all matching coordinates into an array
+        //Validate if the array contains four coordinates with the same horizontal value, vertical value or diagonal pattern
+        const currentBoard = this.board;
+        let rowSlots = [];
+        //console.log(currentBoard);
+        console.log(slot);
+        
+        for(let y = 0; y < 7; y++) {
+            rowSlots.push(currentBoard[y][slot.coord]);
+        //     console.log(currentBoard[y][slot.coord]);
+        //     console.log(rowSlots);
+        }
+
+
+
+
+
+
+
+
+        //for(let x = 0; x < currentBoard.length; x++) {
+            //console.log(currentBoard[x]);
+            // for(let y = 0; y < 7; y++) {
+            //     rowSlots.push(currentBoard[slot.coord[0]]);
+            //     console.log(rowSlots);
+                //console.log(rowSlots);
+                // if(currentBoard[x][y].player != null) {
+                //     console.log(currentBoard[x][y].player);
+                //     occupiedSlots.push(currentBoard[x][y].coord);
+                //     console.log(occupiedSlots);
+                //     console.log(occupiedSlots[0][0]);
+                //     for(let z = 0; z < occupiedSlots.length; z++) {
+                //         console.log(occupiedSlots[z][z]);
+                //         if(occupiedSlots[z][z] === occupiedSlots[z][z]){
+                //             verticalCounter + 1;
+                //             console.log("Vertical Counter: " + verticalCounter);
+                //         }
+                //     }
+                //     break;
+                //     occupiedSlots = [];
+                // }
+            //}
+        //}
     }
 }
 
