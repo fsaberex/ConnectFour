@@ -124,7 +124,7 @@ class Game {
                 let bottomSlot = [columnArray[0].coord[0], i + 1];
                 this.checkBoard(bottomSlot);
                 // filledSlot.style.backgroundColor = player;
-                console.log(this.board);
+                //console.log(this.board);
                 break;
             }
             
