@@ -136,54 +136,35 @@ class Game {
     }
 
     checkBoard(slot) {
-        // create a new array that includes every slot in the row to which the token was added
-        // read through that array looking for a consecutive group of four same-color tokens
+        // console.log(slot);
+        // console.log(this.activePlayer);
+        // console.log(this.board[0][5]);
+        let currentSlots = [];
 
-        //When a piece is dropped, we want to evaluate the board every time.
-        //We want to check for vertical, horizontal, and diagonal.
-        //Gather all matching coordinates into an array
-        //Validate if the array contains four coordinates with the same horizontal value, vertical value or diagonal pattern
-        const currentBoard = this.board;
-        let rowSlots = [];
-        //console.log(currentBoard);
-        console.log(slot);
+        for(let x = 0; x < 6; x++){
+            for(let y = 0; y < 7; y++){
+                if(this.board[y][x].player != null && this.activePlayer === this.board[y][x].player){
+                    currentSlots.push(this.board[y][x].coord);
+                }
+            }
+        }
+        console.log(currentSlots);
         
-        for(let y = 0; y < 7; y++) {
-            rowSlots.push(currentBoard[y][slot.coord]);
-        //     console.log(currentBoard[y][slot.coord]);
-        //     console.log(rowSlots);
+        for(let z = 0; z < currentSlots.length; z++){
+            //evaluate for columns
+            while(String(currentSlots[z]) === String(slot)){
+
+            }
+
+            //evaluate for rows
+
+            
+            //evaluate for diagonals
+
+
         }
 
-
-
-
-
-
-
-
-        //for(let x = 0; x < currentBoard.length; x++) {
-            //console.log(currentBoard[x]);
-            // for(let y = 0; y < 7; y++) {
-            //     rowSlots.push(currentBoard[slot.coord[0]]);
-            //     console.log(rowSlots);
-                //console.log(rowSlots);
-                // if(currentBoard[x][y].player != null) {
-                //     console.log(currentBoard[x][y].player);
-                //     occupiedSlots.push(currentBoard[x][y].coord);
-                //     console.log(occupiedSlots);
-                //     console.log(occupiedSlots[0][0]);
-                //     for(let z = 0; z < occupiedSlots.length; z++) {
-                //         console.log(occupiedSlots[z][z]);
-                //         if(occupiedSlots[z][z] === occupiedSlots[z][z]){
-                //             verticalCounter + 1;
-                //             console.log("Vertical Counter: " + verticalCounter);
-                //         }
-                //     }
-                //     break;
-                //     occupiedSlots = [];
-                // }
-            //}
-        //}
+       
     }
 }
 
