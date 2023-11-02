@@ -123,8 +123,8 @@ class Game {
                 }
                 let bottomSlot = [columnArray[0].coord[0], i + 1];
                 this.checkBoard(bottomSlot);
-                // filledSlot.style.backgroundColor = player;
-                console.log(this.board);
+                
+                
                 break;
             }
             
@@ -136,54 +136,67 @@ class Game {
     }
 
     checkBoard(slot) {
-        // create a new array that includes every slot in the row to which the token was added
-        // read through that array looking for a consecutive group of four same-color tokens
-
-        //When a piece is dropped, we want to evaluate the board every time.
-        //We want to check for vertical, horizontal, and diagonal.
-        //Gather all matching coordinates into an array
-        //Validate if the array contains four coordinates with the same horizontal value, vertical value or diagonal pattern
+        //create arrays of the row, column and diagonals into which the new token was dropped
         const currentBoard = this.board;
         let rowSlots = [];
-        //console.log(currentBoard);
-        console.log(slot);
+        let colSlots = [];
+        let diagDownSlots = [];
+        let diagUpSlots = [];        
         
-        for(let y = 0; y < 7; y++) {
-            rowSlots.push(currentBoard[y][slot.coord]);
-        //     console.log(currentBoard[y][slot.coord]);
-        //     console.log(rowSlots);
+        //create row array from left to right, [0] to [6]
+        for(let i = 0; i < 7; i++) {
+            rowSlots.push(currentBoard[i][slot[1]-1]);
         }
 
+        //create column array from new token position down to the bottom, slot[1]-1 to [5]
+        for(let i = slot[1] - 1; i < 6; i++) {
+            colSlots.push(currentBoard[slot[0]-1][i]);
+        }
+
+        //create diagonal "up" array from bottom left to top right
+        //create diagonal "down" array from top left to bottom right
+
+        //check the row array for win condition
+        let consecutivePieces = 1;
+        for (let i = 1; i < rowSlots.length; i++) {
+            if (rowSlots[i].player && rowSlots[i].player === rowSlots[i-1].player){
+                consecutivePieces++;
+                if (consecutivePieces >=4) {
+                    console.log(rowSlots[i].player + " wins!");
+                    //add code here to add 1 to player's win counter and reset the board
+                    return;
+                }
+            }
+            else {
+                consecutivePieces = 1;
+            } 
+        }
+
+        //check the column array for win condition
+        // consecutivePieces = 1;
+        // for (let i = 0; i < colSlots.length; i++) {
+        // //     
+        //     console.log(colSlots);
+        //     console.log(colSlots[i+1]);
+            
+        
+        //      if (colSlots[i].player && colSlots[i].player === colSlots[i+1].player){
+        //         consecutivePieces++;
+        //         if (consecutivePieces >=4) {
+        //             console.log(colSlots[i-1].player + " wins!");
+        //             return;
+        //         }
+        //     }
+        //     else {
+        //         consecutivePieces = 1;
+        //     } 
+        // }
 
 
 
 
 
 
-
-        //for(let x = 0; x < currentBoard.length; x++) {
-            //console.log(currentBoard[x]);
-            // for(let y = 0; y < 7; y++) {
-            //     rowSlots.push(currentBoard[slot.coord[0]]);
-            //     console.log(rowSlots);
-                //console.log(rowSlots);
-                // if(currentBoard[x][y].player != null) {
-                //     console.log(currentBoard[x][y].player);
-                //     occupiedSlots.push(currentBoard[x][y].coord);
-                //     console.log(occupiedSlots);
-                //     console.log(occupiedSlots[0][0]);
-                //     for(let z = 0; z < occupiedSlots.length; z++) {
-                //         console.log(occupiedSlots[z][z]);
-                //         if(occupiedSlots[z][z] === occupiedSlots[z][z]){
-                //             verticalCounter + 1;
-                //             console.log("Vertical Counter: " + verticalCounter);
-                //         }
-                //     }
-                //     break;
-                //     occupiedSlots = [];
-                // }
-            //}
-        //}
     }
 }
 
