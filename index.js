@@ -103,7 +103,7 @@ class Game {
 
                 }
                 let bottomSlot = [columnArray[0].coord[0], i + 1];
-                this.checkBoard(bottomSlot);
+                this.checkBoard();
                 // filledSlot.style.backgroundColor = player;
                 //console.log(this.board);
                 break;
@@ -116,17 +116,14 @@ class Game {
         instructions.innerText = `It is now ${this.activePlayer}'s turn`
     }
 
-    checkBoard(slot) {
+    checkBoard() {
 
         let board = this.board;
         console.log(board[0]);
 
-        // Check for a vertical win
+        // Check vertical
         for (let row = 0; row < 6; row++) {
             for (let col = 0; col < 3; col++) {
-                //console.log(board[col][row]);
-                //console.log(board[col][row].player);
-                //console.log(board[col][row + 1].coord);
                 if (board[row][col].player !== null &&
                 board[row][col].player === board[row][col + 1].player &&
                 board[row][col].player === board[row][col + 2].player &&
@@ -137,10 +134,9 @@ class Game {
           }
         }
 
-        // Check for a horizontal win
+        // Check horizontal
         for (let row = 0; row < 3; row++) {
             for (let col = 0; col < 6; col++) {
-                //console.log(board[row][col]);
                 if (board[row][col].player !== null &&
                     board[row][col].player === board[row + 1][col].player &&
                     board[row][col].player === board[row + 2][col].player &&
@@ -152,7 +148,7 @@ class Game {
             }
         }
 
-        // Check for a diagonal win (bottom-left to top-right)
+        // Check diagonal bottom-left to top-right)
         for (let row = 3; row < 6; row++) {
             for (let col = 0; col < 3; col++) {
               if (board[row][col].player !== null &&
@@ -165,7 +161,7 @@ class Game {
             }
         }
         
-        // Check for a diagonal win (bottom-right to top-left)
+        // Check diagonal bottom-right to top-left
         for (let row = 3; row < 6; row++) {
             for (let col = 2; col < 6; col++) {
               if (board[row][col].player !== null &&
