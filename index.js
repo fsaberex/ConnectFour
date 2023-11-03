@@ -27,25 +27,6 @@
 
 */
 
-// set up the players
-
-
-// let currentPlayer = playerOne
-
-// const playerOne = {
-//     name : '',
-//     color: '',
-//     wins: 0
-
-// }
-
-// const playerTwo = {
-//     name: '',
-//     color: '',
-//     wins: 0
-
-// }
-
 // set up the board with a function 
 
 let instructions = document.getElementById('instructions');
@@ -136,71 +117,75 @@ class Game {
     }
 
     checkBoard(slot) {
-        // console.log(slot);
-        // console.log(this.activePlayer);
-        // console.log(this.board[0][5]);
-        let currentSlots = [];
 
-        for(let x = 0; x < 6; x++){
-            for(let y = 0; y < 7; y++){
-                if(this.board[y][x].player != null && this.activePlayer === this.board[y][x].player){
-                    currentSlots.push(this.board[y][x].coord);
+        let board = this.board;
+        console.log(board[0]);
+
+        // Check for a vertical win
+        for (let row = 0; row < 6; row++) {
+            for (let col = 0; col < 3; col++) {
+                //console.log(board[col][row]);
+                //console.log(board[col][row].player);
+                //console.log(board[col][row + 1].coord);
+                if (board[row][col].player !== null &&
+                board[row][col].player === board[row][col + 1].player &&
+                board[row][col].player === board[row][col + 2].player &&
+                board[row][col].player === board[row][col + 3].player) {
+                    console.log("inside vertical statement.")
+                return board[row][col];
+            }
+          }
+        }
+
+        // Check for a horizontal win
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 6; col++) {
+                //console.log(board[row][col]);
+                if (board[row][col].player !== null &&
+                    board[row][col].player === board[row + 1][col].player &&
+                    board[row][col].player === board[row + 2][col].player &&
+                    board[row][col].player === board[row + 3][col].player) {
+                        console.log("inside horizontal statement.")
+                    return board[row][col];
+                    
                 }
             }
         }
-        console.log(currentSlots);
-        
-        for(let z = 0; z < currentSlots.length; z++){
-            //evaluate for columns
-            while(String(currentSlots[z]) === String(slot)){
 
+        // Check for a diagonal win (bottom-left to top-right)
+        for (let row = 3; row < 6; row++) {
+            for (let col = 0; col < 3; col++) {
+              if (board[row][col].player !== null &&
+                  board[row][col].player === board[row - 1][col + 1].player &&
+                  board[row][col].player === board[row - 2][col + 2].player &&
+                  board[row][col].player === board[row - 3][col + 3].player) {
+                    console.log("inside diagonal left to right statement.")
+                return board[row][col];
+              }
             }
-
-            //evaluate for rows
-
-            
-            //evaluate for diagonals
-
-
+        }
+        
+        // Check for a diagonal win (bottom-right to top-left)
+        for (let row = 3; row < 6; row++) {
+            for (let col = 2; col < 6; col++) {
+              if (board[row][col].player !== null &&
+                  board[row][col].player === board[row - 1][col - 1].player &&
+                  board[row][col].player === board[row - 2][col - 2].player &&
+                  board[row][col].player === board[row - 3][col - 3].player) {
+                    console.log("inside diagonal right to left statement.")
+                return board[row][col];
+              }
+            }
         }
 
-       
     }
+
+
 }
 
 
 let game = new Game();
-// fill()
-//
 
-
-//What we know what we want to do
-//Play connect four
-//Have two players
-//Win counter
-//Have Slot classes that provide the player color and coordinates in the grid
-//What are the challenges we will face?
-//Getting our heads in the same place (having everyone understand the logic). Different perspectives.
-//Sufficiently communicating when we need help
-//add a dropping sound
-//yeet button
-
-// const grid = {
-//     slots: [],
-//     xValue: '',
-//     yValue: '',
-// }
-
-
-// function checkCoordinate() {
-    
-// }
-
-// class Slot {
-//     constructor(coords) {
-//         coords: [];
-//     }
-    
 
 
 
