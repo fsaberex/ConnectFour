@@ -13,6 +13,7 @@ class Game {
     constructor() {
         this.board = [[],[],[],[],[],[],[]];
         this.activePlayer = 'red';
+        
         this.makeBoard();
     }
 
@@ -39,6 +40,10 @@ class Game {
             board.append(row);
         }
         instructions.innerText = `It is ${this.activePlayer}'s turn`
+
+        let resetButton = document.getElementById('restart-button');
+        
+        resetButton.addEventListener('click', () => {this.clearBoard()});
     }
 
     placeToken(slot) {
@@ -124,7 +129,6 @@ class Game {
             x--;
             y--;
         }
-        console.log(diagDownSlots);
         this.checkLine(diagDownSlots);
     }
 
@@ -135,7 +139,7 @@ class Game {
                 consecutivePieces++;
                 if (consecutivePieces >=4) {
                     console.log(line[i].player + " wins!");
-                    //add code here to add 1 to player's win counter and reset the board
+                    this.clearBoard();
                     return;
                 }
             }
@@ -144,6 +148,19 @@ class Game {
             } 
         }
     }
+
+    clearBoard(){
+        const currentBoard = this.board;
+        
+        let clearedBoard = document.getElementById('board');
+        clearedBoard.innerHTML = "";
+        this.board = [[],[],[],[],[],[],[]];
+        this.activePlayer = 'red';
+        this.makeBoard();
+
+
+    }
+    
 }
 
 let game = new Game();
