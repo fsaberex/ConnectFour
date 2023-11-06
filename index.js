@@ -151,6 +151,7 @@ class Game {
         this.checkLine(diagDownSlots);
     }
 
+    //check an array of slots for four consecutive tokens of the same player; declare winner if found and add one to winner's win counter
     checkLine (line) {
         let consecutivePieces = 1;
         for (let i = 1; i < line.length; i++) {
@@ -164,7 +165,7 @@ class Game {
                         this.blackWins++;
                     }
 
-                    //update the counters
+                    //update the win counters on the page
                     let redCounter = document.getElementById("red-wins");
                     let blackCounter = document.getElementById("black-wins");
 
@@ -181,6 +182,7 @@ class Game {
         }
     }
 
+    //display the game results on the page
     declareOutcome (result) {
         let winnerDiv = document.getElementById("winner");
         let winnerText = document.getElementById("winner-text");
@@ -196,6 +198,7 @@ class Game {
         }
     }
 
+    //Clear the game board for a new game
     clearBoard(){
         const currentBoard = this.board;
         
