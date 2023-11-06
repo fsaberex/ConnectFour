@@ -26,6 +26,7 @@ main {
     -webkit-box-shadow: -10px 10px 18px -4px rgba(0,0,0,0.61);
     -moz-box-shadow: -10px 10px 18px -4px rgba(0,0,0,0.61);
     min-width: 800px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .row {
@@ -65,7 +66,7 @@ main {
 }
 
 #status {
-    width: 300px;
+    width: 400px;
     text-align: center;
     margin:auto;
     font-size: 1.5em;
@@ -73,11 +74,11 @@ main {
 
 #red-wins {
     display: inline;
-    margin:10px;
+    margin: 10px;
 }
 #black-wins {
     display: inline;
-    margin:10px;
+    margin: 10px;
 }
 
 #winner {
@@ -93,6 +94,7 @@ main {
     border: dotted green 3px;
     text-transform: capitalize; 
     font-size: 3em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 #play-again {

@@ -90,6 +90,7 @@ class Game {
         }
 
         //switch the current player
+        instructions = document.getElementById('instructions');
         this.activePlayer = this.activePlayer === 'red' ? 'black' : 'red';
         instructions.innerText = `It is ${this.activePlayer}'s turn`
     }
@@ -187,10 +188,11 @@ class Game {
         playAgain.style.display = 'block';
         winnerDiv.style.display = 'flex';
         if (result !== 'draw'){
-            winnerText.innerHTML = result + " wins!    ";
+            winnerText.innerHTML = result + " wins!";
+            winnerText.style.color = result;
         }
         else {
-            winnerText.textContent = "It's a draw! ";
+            winnerText.textContent = "It's a draw!";
         }
     }
 
