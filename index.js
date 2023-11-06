@@ -17,6 +17,9 @@ class Game {
         this.makeBoard();
     }
 
+    redWins = 0;
+    blackWins = 0;
+
     makeBoard() {
         let rows = 6;
         let columns = 7;
@@ -42,8 +45,12 @@ class Game {
         instructions.innerText = `It is ${this.activePlayer}'s turn`
 
         let resetButton = document.getElementById('restart-button');
-        
         resetButton.addEventListener('click', () => {this.clearBoard()});
+
+        let replayButton = document.getElementById('play-again');
+        replayButton.addEventListener('click', () => {this.clearBoard()});
+
+
     }
 
     placeToken(slot) {
@@ -70,10 +77,21 @@ class Game {
                 break;
             }
         }
+        
+        //Check for a full board and declare a draw
+        let topRowFilled = 0;
+        for (let i = 0; i < 7; i++) {
+            if (this.board[i][0].player !== null) {
+                topRowFilled++;
+                if (topRowFilled >= 7) {
+                    this.declareOutcome('draw');
+                }
+            }
+        }
 
         //switch the current player
         this.activePlayer = this.activePlayer === 'red' ? 'black' : 'red';
-        instructions.innerText = `It is now ${this.activePlayer}'s turn`
+        instructions.innerText = `It is ${this.activePlayer}'s turn`
     }
 
     checkBoard(slot) {
@@ -138,8 +156,21 @@ class Game {
             if (line[i].player && line[i].player === line[i-1].player){
                 consecutivePieces++;
                 if (consecutivePieces >=4) {
-                    console.log(line[i].player + " wins!");
-                    this.clearBoard();
+                    if (line[i].player === 'red') {
+                        this.redWins++
+                    }
+                    else {
+                        this.blackWins++;
+                    }
+
+                    //update the counters
+                    let redCounter = document.getElementById("red-wins");
+                    let blackCounter = document.getElementById("black-wins");
+
+                    redCounter.innerText = "Red wins: " + this.redWins;
+                    blackCounter.innerText = "Black wins: " + this.blackWins;
+
+                    this.declareOutcome(line[i].player);
                     return;
                 }
             }
@@ -149,16 +180,34 @@ class Game {
         }
     }
 
+    declareOutcome (result) {
+        let winnerDiv = document.getElementById("winner");
+        let winnerText = document.getElementById("winner-text");
+        let playAgain = document.getElementById("play-again");
+        playAgain.style.display = 'block';
+        winnerDiv.style.display = 'flex';
+        if (result !== 'draw'){
+            winnerText.innerHTML = result + " wins!    ";
+        }
+        else {
+            winnerText.textContent = "It's a draw! ";
+        }
+    }
+
     clearBoard(){
         const currentBoard = this.board;
         
         let clearedBoard = document.getElementById('board');
-        clearedBoard.innerHTML = "";
+        let winnerDiv = document.getElementById("winner");
+        winnerDiv.style.display = 'none';
+        clearedBoard.innerHTML = `<div id="status">
+            <div id="instructions">It is red's turn</div>
+            <div id="red-wins">Red wins: ${this.redWins}</div>
+            <div id="black-wins">Black wins: ${this.blackWins}</div>
+            </div>`;
         this.board = [[],[],[],[],[],[],[]];
         this.activePlayer = 'red';
         this.makeBoard();
-
-
     }
     
 }
