@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connect Four</title>
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="connectFourStyle.css">
     <title>Play Connect Four!</title>
 </head>
@@ -13,20 +13,28 @@
 
     <main>
         <div id="title-container">
-            <h1 id="title">Lets Play Connect Four!</h1>
+            <h1 id="title">Let's Play Connect Four!</h1>
         </div>
         
 
             <div id = "board">
-
-                
+                <div id="status">
+                    <div id="instructions"></div>
+                    <div id="red-wins">Red wins: 0</div>
+                    <div id="black-wins">Black wins: 0</div>
+                </div>
             </div>
             <p id="game-message"></p>
+            <div id="winner">
+                <div id="winner-text"></div>
+                <button id="play-again" class="material-symbols-outlined">
+                    restart_alt
+                </button>
+            </div>
+           
 
         </main>
-    <h2 id="instructions"></h2>
-    <button id="start-game">Start Game</button>
-    <button id="restart-button">Restart</button>
+    <center><button id="restart-button">Restart</button></center>
 
 
     <script src="./index.js"></script>
